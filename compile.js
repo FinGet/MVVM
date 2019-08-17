@@ -1,6 +1,15 @@
 class Compile{
 	constructor(el, vm) {
 		this.el = this.isElementNode(el)?el:document.querySelector(el); // #app document.queryselector
+
+		 /* istanbul ignore if  vue源码的mounted会覆盖挂载的元素*/ 
+		 if (el === document.body || el === document.documentElement) {
+      warn(
+        "Do not mount Vue to <html> or <body> - mount to normal elements instead."
+      );
+      return this
+		}
+		
 		this.vm = vm;
 
 		if(this.el) {
